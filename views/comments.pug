@@ -1,4 +1,25 @@
 extends layout
 
 block content
-    h1 comments
+    h1 Tell Us How We're Doing!
+
+    hr
+    form(method='POST',action='/comment')
+        label(for='comment') Post a Comment: 
+        input(type='comment', name='comment',id='comment', required) 
+        //todo: required here or in database?
+        button(type='submit',class='combtn') Post
+    hr
+
+    h2 Comments
+    ol
+    each val in todos
+        li 
+            span= val.task
+      
+    footer
+        p Other pages:
+        ul
+            a(href='/') Landing Page
+            a(href='/about') About Us
+            a(href='/menu') Menu
