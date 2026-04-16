@@ -9,8 +9,35 @@ router.get('/', function(req, res, next){
         console.error('Error fetching todos:', err);
         return res.status(500).send('Error fetching todos');
       }
-      res.render('index', { title: 'My Simple TODO', todos: results });
+      res.render('landing', { title: 'Downtown Donuts', todos: results });
     });
+  } catch (error) {
+    console.error('Error fetching items:', error);
+    res.status(500).send('Error fetching items');
+  }
+});
+
+router.get('/about',function(req,res,next){
+  try {
+  res.render('about',{title: 'About Us'});
+  } catch (error) {
+    console.error('Error fetching items:', error);
+    res.status(500).send('Error fetching items');
+  }
+});
+
+router.get('/comments',function(req,res,next){
+  try {
+  res.render('comments',{title: 'Comments'});
+  } catch (error) {
+    console.error('Error fetching items:', error);
+    res.status(500).send('Error fetching items');
+  }
+});
+
+router.get('/menu',function(req,res,next){
+  try {
+  res.render('menu',{title: 'Menu'});
   } catch (error) {
     console.error('Error fetching items:', error);
     res.status(500).send('Error fetching items');
