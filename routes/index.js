@@ -100,7 +100,12 @@ router.get('/menu',function(req,res,next){
 
 router.post('/comment', function (req, res, next) {
     const MAX_LENGTH = 500;
-    const { comment } = req.body;
+    const sanitize = (str) => str.replace(/[<>"'`]/g, (char) => ({
+        '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;'
+    }[char]));
+
+    const original = req.body.comment || '';
+    const comment = sanitize(original.trim());
 
     if (!comment) {
       return res.render('comments',{
