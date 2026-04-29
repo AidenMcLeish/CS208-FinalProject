@@ -12,7 +12,7 @@ block content
         label(for='comment') Post a Comment: 
         input(type='text', name='comment',id='comment', maxlength='500', required) 
         //todo: required here or in database?
-        button(type='submit',class='combtn') Post
+        button(type='submit',class='combtn', onclick='this.disabled=true; this.form.submit();') Post
     hr
 
     h2 Comments
@@ -20,7 +20,7 @@ block content
     if todos.length === 0
         p No comments yet.
     else
-        ol
+        ul
             each val in todos
                 li 
                     span= val.task
