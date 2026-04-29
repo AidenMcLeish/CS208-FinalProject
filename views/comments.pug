@@ -6,16 +6,28 @@ block content
     hr
     form(method='POST',action='/comment')
         label(for='comment') Post a Comment: 
-        input(type='comment', name='comment',id='comment', required) 
+        input(type='text', name='comment',id='comment', maxlength='500', required) 
         //todo: required here or in database?
         button(type='submit',class='combtn') Post
     hr
 
     h2 Comments
-    ol
-    each val in todos
-        li 
-            span= val.task
+
+    if todos.length === 0
+        p No comments yet.
+    else
+        ol
+            each val in todos
+                li 
+                    span= val.task
+
+        if totalPages > 1
+            .pagination
+                if currentPage > 1
+                    a(href=`/comments?page=${currentPage - 1}`) ← Prev
+                span Page #{currentPage} of #{totalPages}
+                if currentPage < totalPages
+                    a(href=`/comments?page=${currentPage + 1}`) Next →
       
     footer
         p Other pages:

@@ -27,13 +27,28 @@ router.get('/about',function(req,res,next){
 });
 
 router.get('/comments',function(req,res,next){
+  const TOTAL_COMMENTS = 10;
+  const currentPage = Math.max(1, parseInt(req.query.page) || 1);
+  const offset = (currentPage - 1) * TOTAL_COMMENTS;
+
   try {
-    req.db.query('SELECT * FROM todos;', (err, results) => {
+    req.db.query('SELECT COUNT(*) AS total FROM todos;', (err, results) => {
       if (err) {
         console.error('Error fetching todos:', err);
         return res.status(500).send('Error fetching todos');
       }
-    res.render('comments',{title: 'Comments', todos: results});
+
+      const totalComments = results[0].total;
+      const totalPages = Math.ceil(totalComments / TOTAL_COMMENTS);
+
+      req.db.query('SELECT task FROM todos LIMIT ? OFFSET ?;',[TOTAL_COMMENTS, offset], (err, results) => {
+        if (err){
+        console.error('Error fetching todos:', err);
+        return res.status(500).send('Error fetching todos');
+        }
+        res.render('comments',{title: 'Comments', todos: results, currentPage, totalPages});
+      }
+      )
     });
   } catch (error) {
     console.error('Error fetching items:', error);
@@ -51,6 +66,7 @@ router.get('/menu',function(req,res,next){
 });
 
 router.post('/comment', function (req, res, next) {
+
     const { comment } = req.body;
     try {
       req.db.query('INSERT INTO todos (task) VALUES (?);', [comment], (err, results) => {
