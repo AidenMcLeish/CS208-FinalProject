@@ -1,18 +1,27 @@
 extends layout
 
 block content
-  h1= title
+  
+  h1.logo= title
   p Welcome to #{title}
 
   if errMessage
         p.err-msg= errMessage
+
+  p
+    a(href='/menu') View our menu!
+  
+  p
+    a(href='/comments') Tell us how we're doing!
+
   
   footer
-    p Other pages:
-    ul
-      a(href='/about') About Us
-      br
-      a(href='/menu') Menu
-      br
-      a(href='/comments') Comments
-      br
+    hr
+    table
+      tr
+        td Downtown Donuts | 
+        td 123 Main Street, Downtown | 
+        td (555) 867-5309 | 
+        td 
+          a(href='/about') About Us
+                  

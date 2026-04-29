@@ -1,6 +1,7 @@
 extends layout
 
 block content
+
     h1 Tell Us How We're Doing!
 
     hr
@@ -30,10 +31,10 @@ block content
         if totalPages > 1
             .pagination
                 if currentPage > 1
-                    a(href=`/comments?page=${currentPage - 1}`) ← Prev
+                    a(href=`/comments?page=${currentPage - 1}`) ← Prev 
                 span Page #{currentPage} of #{totalPages}
                 if currentPage < totalPages
-                    a(href=`/comments?page=${currentPage + 1}`) Next →
+                    a(href=`/comments?page=${currentPage + 1}`)  Next →
       
     footer
         hr

@@ -1,6 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Italianno&family=Montserrat&display=swap');
+
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px 'Montserrat', sans-serif;
+  color: #F7F7F7;
+  background-color: #10291D;
+  text-align: center;
+}
+header {
+  display: flex;
+  align-items: center;
 }
 
 a {
@@ -10,4 +19,11 @@ a {
 .menu-desc {
   color: grey;
   font-size: 10px;
+}
+table {
+  margin: auto;
+}
+
+.logo{
+  font: 64px 'Italianno', sans-serif;
 }

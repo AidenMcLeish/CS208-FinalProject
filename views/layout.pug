@@ -4,4 +4,18 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    header
+      a(href='/')
+        img(src="/images/downtownlogo.png", alt='Logo Image', width='200', height='160')
+      table
+        tr
+          th OPEN DAILY
+          th ORDER ONLINE
+        tr
+          td Mon-Fri 6AM-6PM | Sat-Sun 7AM-4PM
+          td 
+            ul
+              a(href='https://www.ubereats.com/') UberEats |
+              a(href='https://www.doordash.com/') DoorDash |
+              a(href='https://www.grubhub.com/') GrubHub
     block content
