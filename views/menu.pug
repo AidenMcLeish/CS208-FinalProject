@@ -3,6 +3,9 @@ extends layout
 block content
     h1 menu
 
+    if errMessage
+        p.err-msg= errMessage
+
     footer
         p Other pages:
         ul
