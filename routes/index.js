@@ -35,18 +35,45 @@ router.get('/comments',function(req,res,next){
     req.db.query('SELECT COUNT(*) AS total FROM todos;', (err, results) => {
       if (err) {
         console.error('Error counting comments:', err);
-        return res.render('comments', {title: 'Comments', todos: [], errMessage: 'Unable to load comments.', currentPage: 1, totalPages: 1});
+        return res.render('comments', {
+          title: 'Comments', 
+          todos: [], 
+          errMessage: 'Unable to load comments.', 
+          currentPage: 1, 
+          totalPages: 1
+        });
       }
 
       const totalComments = results[0].total;
       const totalPages = Math.ceil(totalComments / TOTAL_COMMENTS);
 
-      req.db.query('SELECT task FROM todos LIMIT ? OFFSET ?;',[TOTAL_COMMENTS, offset], (err, results) => {
+      req.db.query('SELECT task, birthday FROM todos ORDER BY birthday DESC LIMIT ? OFFSET ?;',[TOTAL_COMMENTS, offset], (err, results) => {
         if (err){
         console.error('Error loading comments:', err);
-        return res.render('comments', {title: 'Comments', todos: [], errMessage: 'Unable to load comments.', currentPage: 1, totalPages: 1});
+        return res.render('comments', {
+          title: 'Comments', 
+          todos: [], 
+          errMessage: 'Unable to load comments.', 
+          currentPage: 1, 
+          totalPages: 1
+        });
         }
-        res.render('comments',{title: 'Comments', todos: results, currentPage, totalPages});
+        const todos = results.map(row => {
+          const diffMs = Date.now() - new Date(row.birthday).getTime();
+          const diffMins = Math.floor(diffMs / 60000);
+          const diffHours = Math.floor(diffMins / 60);
+          const diffDays = Math.floor(diffHours / 24);
+
+          let diffTime;
+          if (diffMins < 1) diffTime = 'just now';
+          else if (diffMins < 60) diffTime = `${diffMins} minute${diffMins !== 1 ? 's' : ''} ago`;
+          else if (diffHours < 24) diffTime = `${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`;
+          else diffTime = `${diffDays} day${diffDays !== 1 ? 's' : ''} ago`;
+
+          return { task: row.task, diffTime };
+      });
+
+        res.render('comments',{title: 'Comments', todos, currentPage, totalPages});
       }
       )
     });
@@ -94,8 +121,10 @@ router.post('/comment', function (req, res, next) {
         });
     }
 
+    const birth = new Date();
+
     try {
-      req.db.query('INSERT INTO todos (task) VALUES (?);', [comment], (err, results) => {
+      req.db.query('INSERT INTO todos (task, birthday) VALUES (?,?);', [comment, birth], (err, results) => {
         if (err) {
         console.error('Error posting comment:', err);
         return res.render('comments', {

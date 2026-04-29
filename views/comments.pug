@@ -24,6 +24,8 @@ block content
             each val in todos
                 li 
                     span= val.task
+                    br
+                    span= val.diffTime
 
         if totalPages > 1
             .pagination
