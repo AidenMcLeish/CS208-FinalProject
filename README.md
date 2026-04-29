@@ -9,3 +9,6 @@ Students must **replace** this README with a README that is specific to your
 project. **IMPORTANT**: If you do not complete the README, your project will not
 be graded, and you will receive a zero. The TA will not guess how to set up,
 configure, and run your project.
+
+Claude assisted with sanitization, pagination (cite later)
+for pagination, tried making results disappear when next button clicked as opposed to making actual page links (didn't know how to do that)
