@@ -3,15 +3,20 @@ extends layout
 block content
   
   h1.logo= title
-  p Welcome to #{title}
+  h1 Welcome to #{title}!
+
+  img(src="/images/downtownlogo.png", alt='Placeholder Image')
+
+  p.place /The large logo image above is being used as a placeholder for any desired image (such as a picture of the store itself)/
+  p.place /Landing Page Placeholder Text - desired text here/
 
   if errMessage
         p.err-msg= errMessage
 
-  p
+  h2
     a(href='/menu') View our menu!
   
-  p
+  h2
     a(href='/comments') Tell us how we're doing!
 
   

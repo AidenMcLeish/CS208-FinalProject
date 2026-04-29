@@ -2,7 +2,7 @@
 
 body {
   padding: 50px;
-  font: 14px 'Montserrat', sans-serif;
+  font: 16px 'Montserrat', sans-serif;
   color: #F7F7F7;
   background-color: #10291D;
   text-align: center;
@@ -13,17 +13,36 @@ header {
 }
 
 a {
-  color: #00B7FF;
+  color: #86ddff;
 }
 
 .menu-desc {
   color: grey;
-  font-size: 10px;
+  font-size: 12px;
 }
 table {
   margin: auto;
 }
+.menu-table {
+  width: 100%;
+  text-align:left;
+  border-spacing: 10px;
+}
+.price {
+  text-align: right;
+}
 
 .logo{
-  font: 64px 'Italianno', sans-serif;
+  font: 100px 'Italianno', sans-serif;
+}
+
+.place {
+  font-size: 16px;
+}
+
+hr {
+  border-color: #F7C64A;
+}
+.addons {
+  font-size: 14px;
 }
