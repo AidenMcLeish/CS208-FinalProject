@@ -49,5 +49,9 @@ The only link to the About Us page is through the footer on the home page; this 
 
 One might also notice that when a comment is posted and viewed within 60 seconds, the time elapsed is not actually shown in seconds, but it defaults to "just now." This was an attempt at making the comment section more realistic, as this is a very common feature in real applications.
 
+## Edge Cases
+
+If server/API unreachable: 
+
 Claude assisted with sanitization, pagination (cite later)
 for pagination, tried making results disappear when next button clicked as opposed to making actual page links (didn't know how to do that)
