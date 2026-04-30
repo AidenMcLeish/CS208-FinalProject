@@ -51,7 +51,20 @@ One might also notice that when a comment is posted and viewed within 60 seconds
 
 ## Edge Cases
 
-If server/API unreachable: 
+If server/API unreachable: Error.pug is thrown with a short message and the specific error (i.e, Not Found: 404). Raw error code was removed by removing it from error.pug, and createError had to be defined in app.js.
+As well as this, when the program fails to get the database or one of the pages, a friendly "Unable to load page" (or similar message) is displayed. The header is always present, even when error.pug is loaded, and so the user always has a link back to the home-page (the link in the logo).
 
-Claude assisted with sanitization, pagination (cite later)
-for pagination, tried making results disappear when next button clicked as opposed to making actual page links (didn't know how to do that)
+If a user only comments whitespace or comments an extremely long input, it is rejected client-side first using input attributes; however, this can be bypassed, and so error-handling was added to the POST function in index.js. A message is thrown by the handler and the comment section is disabled, but the user can still refresh the page to get back to it.
+
+As for handling the double-clicking of the submit button, a short function was installed into the button where upon the first click, the button is disabled. Once the form is sent and the page refreshes, it's good to go again.
+
+## Challenges
+
+The pagination of the comment section was likely my greatest struggle, and after struggling with it for a while, I folded and asked Claude Code for help. At first, I attempted to create a function where only 10 comments would appear at a time, and the "next page" buttons would change which comments would appear. This didn't actually create new pages, but would just change what was output on the comments page. For the life of me, I could not get it to work properly for one irritating reason or another, and so I had to seek assistance. I'm sure there was a way for me to have eventually solved the problem my way, but the now-implemented solution was certainly simpler.
+I wasn't incredibly far off, but "const currentPage = Math.max(1, parseInt(req.query.page) || 1);" was the missing piece that allowed for changing the page.
+
+As well as this, formatting the Menu lists/tables was quite the struggle. I had a very hard time separating the menu items and their respective prices despite how simple the solution was. Oddly, each CSS property that is now part of the solution was tried at some point or another alongside some of the others, but in different combinations. Trying to apply all of the different possible solutions was like finding a lock combination through trial-and-error; it seemed as though some only worked best with others and it became difficult to figure out which ones were right and which were wrong. I got it eventually, though.
+
+### Citations
+
+Claude Code was used during the pagination struggle, as aforementioned. I also used it while working on the sanitation of the comments, as I was unsure as to which characters required sanitization and needed advice.
