@@ -11,9 +11,9 @@ block content
         
     form(method='POST',action='/comment')
         label(for='comment') Post a Comment: 
-        input(type='text', name='comment',id='comment', maxlength='500', required) 
+        input.post-input(type='text', name='comment',id='comment', maxlength='500', required) 
         //todo: required here or in database?
-        button(type='submit',class='combtn', onclick='this.disabled=true; this.form.submit();') Post
+        button.post-btn(type='submit',class='combtn', onclick='this.disabled=true; this.form.submit();') Post
     hr
 
     h2 Comments
@@ -21,20 +21,19 @@ block content
     if todos.length === 0
         p No comments yet.
     else
-        ul
+        ul.commlist
             each val in todos
-                li 
-                    span= val.task
-                    br
-                    span= val.diffTime
+                li
+                    p.commtext= '"' + val.task  + '"'
+                    span.commtime= val.diffTime
 
         if totalPages > 1
             .pagination
                 if currentPage > 1
-                    a(href=`/comments?page=${currentPage - 1}`) ← Prev 
-                span Page #{currentPage} of #{totalPages}
+                    a(href=`/comments?page=${currentPage - 1}`) ← Prev
+                span  Page #{currentPage} of #{totalPages} 
                 if currentPage < totalPages
-                    a(href=`/comments?page=${currentPage + 1}`)  Next →
+                    a(href=`/comments?page=${currentPage + 1}`) Next →
       
     footer
         hr
