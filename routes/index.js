@@ -17,6 +17,7 @@ router.get('/', function(req, res, next){
     }
 });
 
+//Get About Us page
 router.get('/about',function(req,res,next){
   try {
   res.render('about',{title: 'About Us'});
@@ -26,6 +27,8 @@ router.get('/about',function(req,res,next){
     }
 });
 
+//Get commments page and sister pages (pagination), 
+// as well as comments and timestamps from database
 router.get('/comments',function(req,res,next){
   const TOTAL_COMMENTS = 10;
   const currentPage = Math.max(1, parseInt(req.query.page) || 1);
@@ -88,7 +91,7 @@ router.get('/comments',function(req,res,next){
         });
       }
 });
-
+//Get menu page
 router.get('/menu',function(req,res,next){
   try {
   res.render('menu',{title: 'Menu'});
@@ -97,7 +100,7 @@ router.get('/menu',function(req,res,next){
         return res.render('menu', {title: 'Menu', errMessage: 'Unable to load menu.'});
     }
 });
-
+//Posts comments to database, grabs timestamps, and handles edge cases
 router.post('/comment', function (req, res, next) {
     const MAX_LENGTH = 500;
     const sanitize = (str) => str.replace(/[<>"'`]/g, (char) => ({

@@ -1,7 +1,8 @@
 extends layout
 
 block content
-  
+  //Simple placeholder About Us page with desired functionality
+
   h1.logo= title
   h1 Welcome to #{title}!
 
@@ -10,16 +11,18 @@ block content
   p.place /The large logo image above is being used as a placeholder for any desired image (such as a picture of the store itself)/
   p.place /Landing Page Placeholder Text - desired text here/
 
+  //Displays error message on screen where required
   if errMessage
         p.err-msg= errMessage
 
+  //Links to other pages
   h2
     a(href='/menu') View our menu!
   
   h2
     a(href='/comments') Tell us how we're doing!
 
-  
+  //Footer with contacts, link to About Us page
   footer
     hr
     table

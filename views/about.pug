@@ -1,17 +1,19 @@
 extends layout
 
 block content
-    
-    h1 About Us
+    //Simple placeholder About Us page with desired functionality
+    h1.logo About Us
 
     img(src="/images/downtownlogo.png", alt='Placeholder Image')
 
     p.place /The large logo image above is being used as a placeholder for any desired image (such as a picture of the store itself)/
     p.place /About Us Placeholder Text - Story told here/
 
+    //Displays error message on screen where required
     if errMessage
         p.err-msg= errMessage
 
+    //Footer with contacts, link to homepage
     footer
         hr
         table
